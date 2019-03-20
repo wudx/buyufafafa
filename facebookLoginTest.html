@@ -31,7 +31,7 @@
     FB.login(function(response) {
       console.log("login",response);
       statusChangeCallback(response);
-    }, {scope: 'public_profile,friends'});
+    }, {scope: 'public_profile,user_friends'});
   }
   function onLogout(){
     FB.logout(function(response) {
