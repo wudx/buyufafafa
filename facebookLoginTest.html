@@ -30,7 +30,8 @@
   function onLogin() {
     FB.login(function(response) {
       console.log("login",response);
-    }, {scope: 'public_profile'});
+      statusChangeCallback(response);
+    }, {scope: 'public_profile,friends'});
   }
   function onLogout(){
     FB.logout(function(response) {
@@ -81,6 +82,9 @@
       console.log('Successful login for: ' , response);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
+    });
+    FB.api('/me/friends', function(response) {
+      console.log('Successful friends : ' , response);
     });
   }
 </script>
