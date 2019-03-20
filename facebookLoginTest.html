@@ -30,7 +30,7 @@
   function onLogin() {
     FB.login(function(response) {
       console.log("login",response);
-    }, {scope: 'public_profile,friends'});
+    }, {scope: 'public_profile'});
   }
   function onLogout(){
     FB.logout(function(response) {
