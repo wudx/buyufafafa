@@ -13,40 +13,15 @@
 <!--   <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
 <script>
   var auth2;
-  
+  var needTrySignin = true;
   var initSigninV2 = function() {
     console.log("initSigninV2")
     auth2 = gapi.auth2.init({
         client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
         scope: 'profile'
     });
-//     console.log("currentUser:",auth2.currentUser)
-    // Listen for sign-in state changes.
     auth2.isSignedIn.listen(signinChanged);
-
-    // Listen for changes to current user.
     auth2.currentUser.listen(userChanged);
-
-    // Sign in the user if they are currently signed in.
-//     console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
-//     var isSignedIn = auth2.isSignedIn.get();
-//     console.log("google isSignedIn",isSignedIn);
-//     if (isSignedIn != true) {
-//       auth2.signIn();
-//     }
-//     setTimeout(function(){console.log(auth2.isSignedIn.get())},3000);
-    
-    var userData = auth2.currentUser.get();
-    console.log("userData",userData)
-    var profile = userData.getBasicProfile();
-    if(profile){
-      console.log("profile",profile);
-      getGoogleInfo(profile);
-    }else{
-      auth2.signIn();
-    }
-    // Start with the current live values.
-//     refreshValues();
   };
   
   var signinChanged = function (val) {
@@ -58,18 +33,23 @@
     console.log('userChanged: ', user);
     
     var profile = user.getBasicProfile();
-    getGoogleInfo(profile);
+    if(profile){
+      getGoogleInfo(profile);
+    }else{
+      if(needTrySignin){
+        auth2.signIn();
+        needTrySignin = false;
+      }
+    }
   };
   
   var getGoogleInfo = function (profile){
-    if(profile){
       console.log('ID: ' + profile.getId());
       console.log('Full Name: ' + profile.getName());
       console.log('Given Name: ' + profile.getGivenName());
       console.log('Family Name: ' + profile.getFamilyName());
       console.log('Image URL: ' + profile.getImageUrl());
       console.log('Email: ' + profile.getEmail());
-    }
   }
   
   function onGoogleLogin(){
