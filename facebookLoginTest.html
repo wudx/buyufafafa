@@ -17,8 +17,8 @@
   var initSigninV2 = function() {
     console.log("initSigninV2")
     auth2 = gapi.auth2.init({
-        client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com'
-//         scope: 'profile'
+        client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
+        scope: 'profile'
     });
 
     // Listen for sign-in state changes.
@@ -36,7 +36,7 @@
     // Start with the current live values.
 //     refreshValues();
   };
-  gapi.load('auth2', initSigninV2);
+  
   var signinChanged = function (val) {
     console.log('Signin state changed to ', val);
 //     document.getElementById('signed-in-cell').innerText = val;
@@ -63,7 +63,8 @@
   
   
   function onGoogleLogin(){
-    auth2.signIn();
+//     auth2.signIn();
+    gapi.load('auth2', initSigninV2);
   }
   function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
