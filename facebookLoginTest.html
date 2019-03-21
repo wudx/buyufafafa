@@ -20,7 +20,7 @@
         client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
         scope: 'profile'
     });
-
+    console.log("currentUser:",auth2.currentUser)
     // Listen for sign-in state changes.
     auth2.isSignedIn.listen(signinChanged);
 
