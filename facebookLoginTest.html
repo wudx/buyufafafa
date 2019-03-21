@@ -73,7 +73,7 @@
          function success(resp){
             ajax("https://api.line.me/v2/profile",null,function lineProfile(res){
               console.log("line profile:",res);
-            })
+            },null,resp["access_token"])
             console.log("lineLogin:",resp);
     })
   }
