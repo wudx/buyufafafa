@@ -18,6 +18,7 @@
       // Logged into your app and Facebook.
       testAPI();
     } else {
+      onLogin();
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
@@ -27,6 +28,11 @@
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
   function onLogin() {
     FB.login(function(response) {
       console.log("login",response);
@@ -46,7 +52,7 @@
       xfbml      : true,  // parse social plugins on this page
       version    : 'v3.2' // The Graph API version to use for the call
     });
-
+    FB.AppEvents.logPageView();   
     // Now that we've initialized the JavaScript SDK, we call 
     // FB.getLoginStatus().  This function gets the state of the
     // person visiting this page and can return one of three states to
@@ -95,7 +101,7 @@
   the FB.login() function when clicked.
 -->
 
-<input type="button" value="Login" onclick="onLogin();" />
+<input type="button" value="Login" onclick="checkLoginState();" />
 <input type="button" value="Logout" onclick="onLogout();" />
 <div id="status">
 </div>
