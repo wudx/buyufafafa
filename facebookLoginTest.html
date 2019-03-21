@@ -31,36 +31,31 @@
 //     console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
     var isSignedIn = auth2.isSignedIn.get();
     console.log("google isSignedIn",isSignedIn);
-    if (isSignedIn != true) {
-      auth2.signIn();
-    }
-
+//     if (isSignedIn != true) {
+//       auth2.signIn();
+//     }
+    setTimeout(function(){console.log(auth2.isSignedIn.get())},3000);
     // Start with the current live values.
 //     refreshValues();
   };
   
   var signinChanged = function (val) {
     console.log('Signin state changed to ', val);
-//     document.getElementById('signed-in-cell').innerText = val;
   };
   
   
   var userChanged = function (user) {
-    console.log('User now: ', user);
-    console.log('userId: ', user.getId());
+    console.log('userChanged: ', user);
     
     var profile = user.getBasicProfile();
-    console.log('ID: ' + profile.getId());
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
-    
-//     googleUser = user;
-//     updateGoogleUser();
-//     document.getElementById('curr-user-cell').innerText =
-//       JSON.stringify(user, undefined, 2);
+    if(profile){
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+    }
   };
   
   
