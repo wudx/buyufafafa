@@ -18,7 +18,7 @@
       if (r != null) return unescape(r[2]); return ""; 
   } 
   
-  function ajax(Url,data,sccuessFn,failureFn) {
+  function ajax(Url,data,successFn,failureFn) {
       //1.创建XMLHttpRequest对象
       var xhr = new XMLHttpRequest();;
       //2.打开与服务器的链接
@@ -33,15 +33,14 @@
       //3.发送给服务器
       xhr.send(data);
       //4.响应就绪
-      xhr.successFn = successFn;
-      xhr.failureFn = failureFn;
+
       xhr.onreadystatechange = function() {
           if(xhr.readyState == 4) {
               if(xhr.status == 200) {
-                  this.successFn(xhr.responseText);
+                  successFn(xhr.responseText);
               }else {
                   if(this.failureFn) {
-                      this.failureFn();
+                      failureFn();
                   }else {
                       alert(xhr.status);
                   }
