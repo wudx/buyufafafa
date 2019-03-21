@@ -45,6 +45,8 @@
   
   var userChanged = function (user) {
     console.log('User now: ', user);
+    var googleUser = auth2.currentUser.get();
+    console.log('googleUser now: ', googleUser);
 //     googleUser = user;
 //     updateGoogleUser();
 //     document.getElementById('curr-user-cell').innerText =
