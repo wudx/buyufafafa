@@ -18,7 +18,7 @@
       if (r != null) return unescape(r[2]); return ""; 
   } 
   
-  function ajax(Url,data,successFn,failureFn) {
+  function ajax(Url,data,successFn,failureFn,token) {
       //1.创建XMLHttpRequest对象
       var xhr = new XMLHttpRequest();;
       //2.打开与服务器的链接
@@ -27,8 +27,13 @@
       }else{
         xhr.open('get',Url,true);
       }
-//       xhr.setRequestHeader("Content-Type","application/json");
+    if(token){
+      xhr.setRequestHeader("Authorization", "Bearer "+token);
+    }else{
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    }
+//       xhr.setRequestHeader("Content-Type","application/json");
+      
       xhr.responseType = "text";
       //3.发送给服务器
       xhr.send(data);
@@ -66,6 +71,9 @@
     data+="&client_secret=8dd0deb3acecb4535b9e0f7c302d88cb";
     ajax("https://api.line.me/oauth2/v2.1/token",data,
          function success(resp){
+            ajax("https://api.line.me/v2/profile",null,function lineProfile(res){
+              console.log("line profile:",res);
+            })
             console.log("lineLogin:",resp);
     })
   }
