@@ -4,13 +4,54 @@
 <title>Facebook Login JavaScript Example</title>
 <meta charset="UTF-8">
 <!-- <script src="https://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.3.0" ></script> -->
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <meta name="google-signin-scope" content="profile email"> -->
+<!-- <meta name="google-signin-client_id" content="816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com"> -->
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+  <script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 <body>
-  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<!--   <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
 <script>
+  gapi.load('auth2', initSigninV2);
+  var initSigninV2 = function() {
+    auth2 = gapi.auth2.init({
+        client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
+        scope: 'profile'
+    });
+
+    // Listen for sign-in state changes.
+    auth2.isSignedIn.listen(signinChanged);
+
+    // Listen for changes to current user.
+    auth2.currentUser.listen(userChanged);
+
+    // Sign in the user if they are currently signed in.
+    console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
+    if (auth2.isSignedIn.get() == true) {
+      auth2.signIn();
+    }
+
+    // Start with the current live values.
+//     refreshValues();
+  };
+  var signinChanged = function (val) {
+    console.log('Signin state changed to ', val);
+//     document.getElementById('signed-in-cell').innerText = val;
+  };
+  
+  
+  var userChanged = function (user) {
+    console.log('User now: ', user);
+//     googleUser = user;
+//     updateGoogleUser();
+//     document.getElementById('curr-user-cell').innerText =
+//       JSON.stringify(user, undefined, 2);
+  };
+  
+  
+  function onGoogleLogin(){
+    auth2.signIn();
+  }
   function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
       var profile = googleUser.getBasicProfile();
@@ -133,6 +174,7 @@
 <input type="button" value="FacebookLogin" onclick="onLogin();" />
 <input type="button" value="FacebookLogout" onclick="onLogout();" />
   <input type="button" value="FacebookShare" onclick="onShare();" />
+  <input type="button" value="GooglSignin" onclick="onGoogleLogin();" />
 <div id="status">
 </div>
 
