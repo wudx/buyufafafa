@@ -27,8 +27,8 @@
       }else{
         xhr.open('get',Url,true);
       }
-      
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("Content-Type","application/json");
+//       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.responseType = "text";
       //3.发送给服务器
       xhr.send(data);
