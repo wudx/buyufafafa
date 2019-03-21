@@ -20,7 +20,7 @@
         client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
         scope: 'profile'
     });
-    console.log("currentUser:",auth2.currentUser)
+//     console.log("currentUser:",auth2.currentUser)
     // Listen for sign-in state changes.
     auth2.isSignedIn.listen(signinChanged);
 
@@ -29,12 +29,19 @@
 
     // Sign in the user if they are currently signed in.
 //     console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
-    var isSignedIn = auth2.isSignedIn.get();
-    console.log("google isSignedIn",isSignedIn);
+//     var isSignedIn = auth2.isSignedIn.get();
+//     console.log("google isSignedIn",isSignedIn);
 //     if (isSignedIn != true) {
 //       auth2.signIn();
 //     }
-    setTimeout(function(){console.log(auth2.isSignedIn.get())},3000);
+//     setTimeout(function(){console.log(auth2.isSignedIn.get())},3000);
+    
+    var profile = auth2.currentUser.getBasicProfile();
+    if(profile){
+      console.log("profile",profile);
+    }else{
+      auth2.signIn();
+    }
     // Start with the current live values.
 //     refreshValues();
   };
@@ -190,7 +197,7 @@
 <input type="button" value="FacebookLogout" onclick="onLogout();" />
   <input type="button" value="FacebookShare" onclick="onShare();" />
   <input type="button" value="GooglSignin" onclick="onGoogleLogin();" />
-  <input type="button" value="GooglSignin" onclick="onGoogleLoginOut();" />
+  <input type="button" value="GooglSignout" onclick="onGoogleLoginOut();" />
 <div id="status">
 </div>
 
