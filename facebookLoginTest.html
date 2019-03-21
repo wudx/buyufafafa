@@ -60,20 +60,13 @@
     auth2.signOut();
   }
   
-  function onSignIn(googleUser) {
-      // Useful data for your client-side scripts:
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-      console.log('Full Name: ' + profile.getName());
-      console.log('Given Name: ' + profile.getGivenName());
-      console.log('Family Name: ' + profile.getFamilyName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail());
-
-      // The ID token you need to pass to your backend:
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log("ID Token: " + id_token);
-    }
+  
+  funtion onLineLogin(){
+    window.location = "
+https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1554398983&redirect_uri=https%3a%2f%2fwudx.github.io%2fbuyufafafa%2ffacebookLoginTest.html&state=12345abcde&scope=openid%20profile&nonce=09876xyz";
+    
+  }
+  
 //   new VConsole();
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -181,9 +174,10 @@
 </fb:login-button>
 <input type="button" value="FacebookLogin" onclick="onLogin();" />
 <input type="button" value="FacebookLogout" onclick="onLogout();" />
-  <input type="button" value="FacebookShare" onclick="onShare();" />
-  <input type="button" value="GooglSignin" onclick="onGoogleLogin();" />
-  <input type="button" value="GooglSignout" onclick="onGoogleLoginOut();" />
+<input type="button" value="FacebookShare" onclick="onShare();" />
+<input type="button" value="GooglSignin" onclick="onGoogleLogin();" />
+<input type="button" value="GooglSignout" onclick="onGoogleLoginOut();" />
+<input type="button" value="LineLogin" onclick="onLineLogin();" />
 <div id="status">
 </div>
 
