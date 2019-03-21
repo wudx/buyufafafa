@@ -27,6 +27,7 @@
       }else{
         xhr.open('get',Url,true);
       }
+    console.log("token:",token);
     if(token){
       xhr.setRequestHeader("Authorization", "Bearer "+token);
     }else{
