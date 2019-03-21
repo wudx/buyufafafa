@@ -31,7 +31,7 @@
 //     console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
     var isSignedIn = auth2.isSignedIn.get();
     console.log("google isSignedIn",isSignedIn);
-    if (isSignedIn == true) {
+    if (isSignedIn != true) {
       auth2.signIn();
     }
 
