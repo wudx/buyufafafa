@@ -12,6 +12,56 @@
 <body>
 <!--   <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
 <script>
+  var getQueryString=function (name) { 
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+      var r = window.location.search.substr(1).match(reg); 
+      if (r != null) return unescape(r[2]); return ""; 
+  } 
+  
+  function ajax(Url,data,sccuessFn,failureFn) {
+      //1.创建XMLHttpRequest对象
+      var xhr = new XMLHttpRequest();;
+      //2.打开与服务器的链接
+      if(data){
+        xhr.open('post',Url,true);
+      }else{
+        xhr.open('get',Url,true);
+      }
+      
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.responseType = "text";
+      //3.发送给服务器
+      xhr.send(data);
+      //4.响应就绪
+      xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4) {
+              if(xhr.status == 200) {
+                  successFn(xhr.responseText);
+              }else {
+                  if(failureFn) {
+                      failureFn();
+                  }else {
+                      alert(xhr.status);
+                  }
+              }
+          }
+      }
+  }
+  
+  var lineCode = getQueryString("code");
+  if(lineCode != ""){
+    var data = {
+      grant_type:"authorization_code",
+      code:lineCode,
+      redirect_uri:"https://wudx.github.io/buyufafafa/facebookLoginTest.html",
+      client_id:"1554398983",
+      client_secret:"8dd0deb3acecb4535b9e0f7c302d88cb"
+    }
+    ajax("https://api.line.me/oauth2/v2.1/token",data,
+        function success(resp){
+          console.log("lineLogin:",resp);
+    })
+  }
   var auth2;
   var needTrySignin = true;
   var initSigninV2 = function() {
