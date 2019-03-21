@@ -30,6 +30,7 @@
     // Sign in the user if they are currently signed in.
 //     console.log("auth2.isSignedIn.get()",auth2.isSignedIn.get());
     var isSignedIn = auth2.isSignedIn.get();
+    console.log("google isSignedIn",isSignedIn);
     if (isSignedIn == true) {
       auth2.signIn();
     }
@@ -67,6 +68,10 @@
 //     auth2.signIn();
     gapi.load('auth2', initSigninV2);
   }
+  function onGoogleLoginOut(){
+    auth2.disconnect();
+  }
+  
   function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
       var profile = googleUser.getBasicProfile();
@@ -190,6 +195,7 @@
 <input type="button" value="FacebookLogout" onclick="onLogout();" />
   <input type="button" value="FacebookShare" onclick="onShare();" />
   <input type="button" value="GooglSignin" onclick="onGoogleLogin();" />
+  <input type="button" value="GooglSignin" onclick="onGoogleLoginOut();" />
 <div id="status">
 </div>
 
