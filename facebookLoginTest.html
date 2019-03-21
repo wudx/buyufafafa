@@ -36,9 +36,11 @@
 //     }
 //     setTimeout(function(){console.log(auth2.isSignedIn.get())},3000);
     
-    var profile = auth2.currentUser.getBasicProfile();
+    var userData = auth2.currentUser.get();
+    var profile = userData.getBasicProfile();
     if(profile){
       console.log("profile",profile);
+      getGoogleInfo(profile);
     }else{
       auth2.signIn();
     }
@@ -55,6 +57,10 @@
     console.log('userChanged: ', user);
     
     var profile = user.getBasicProfile();
+    getGoogleInfo(profile);
+  };
+  
+  var getGoogleInfo = function (profile){
     if(profile){
       console.log('ID: ' + profile.getId());
       console.log('Full Name: ' + profile.getName());
@@ -63,8 +69,7 @@
       console.log('Image URL: ' + profile.getImageUrl());
       console.log('Email: ' + profile.getEmail());
     }
-  };
-  
+  }
   
   function onGoogleLogin(){
 //     auth2.signIn();
