@@ -13,7 +13,7 @@
 <!--   <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
 <script>
   var auth2;
-  gapi.load('auth2', initSigninV2);
+  
   var initSigninV2 = function() {
     console.log("initSigninV2")
     auth2 = gapi.auth2.init({
@@ -36,6 +36,7 @@
     // Start with the current live values.
 //     refreshValues();
   };
+  gapi.load('auth2', initSigninV2);
   var signinChanged = function (val) {
     console.log('Signin state changed to ', val);
 //     document.getElementById('signed-in-cell').innerText = val;
