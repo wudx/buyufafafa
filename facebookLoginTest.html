@@ -152,7 +152,6 @@
       // Logged into your app and Facebook.
       testAPI();
     } else {
-      onLogin();
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
@@ -242,8 +241,6 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 <input type="button" value="FacebookLogin" onclick="onLogin();" />
 <input type="button" value="FacebookLogout" onclick="onLogout();" />
 <input type="button" value="FacebookShare" onclick="onShare();" />
