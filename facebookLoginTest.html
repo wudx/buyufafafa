@@ -120,9 +120,13 @@
     if(profile){
       getGoogleInfo(profile);
     }else{
-      auth2.isSignedIn.listen(signinChanged);
-      auth2.currentUser.listen(userChanged);
-      auth2.signIn();
+      try{
+        auth2.isSignedIn.listen(signinChanged);
+        auth2.currentUser.listen(userChanged);
+        auth2.signIn();
+      }catch(e){
+        console.log("google login error:",e);
+      }
     }
   }
   function onGoogleLoginOut(){
