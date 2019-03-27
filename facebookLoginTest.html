@@ -88,8 +88,7 @@
         client_id: '816540262240-uru477o9rpnivks0ppoqqvh8sabdue44.apps.googleusercontent.com',
         scope: 'profile'
     });
-    auth2.isSignedIn.listen(signinChanged);
-    auth2.currentUser.listen(userChanged);
+    
   };
   
   var signinChanged = function (val) {
@@ -103,11 +102,6 @@
     var profile = user.getBasicProfile();
     if(profile){
       getGoogleInfo(profile);
-    }else{
-      if(needTrySignin){
-        auth2.signIn();
-        needTrySignin = false;
-      }
     }
   };
   
@@ -121,13 +115,20 @@
   }
   
   function onGoogleLogin(){
-//     auth2.signIn();
-    gapi.load('auth2', initSigninV2);
+    
+    var profile = auth2.currentUser.get().getBasicProfile();
+    if(profile){
+      getGoogleInfo(profile);
+    }else{
+      auth2.isSignedIn.listen(signinChanged);
+      auth2.currentUser.listen(userChanged);
+      auth2.signIn();
+    }
   }
   function onGoogleLoginOut(){
     auth2.signOut();
   }
-  
+  gapi.load('auth2', initSigninV2);
   
   function onLineLogin(){
     window.location = "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1554398983&redirect_uri=https%3a%2f%2fwudx.github.io%2fbuyufafafa%2ffacebookLoginTest.html&state=12345abcde&scope=openid%20profile&nonce=09876xyz";
